@@ -19,8 +19,7 @@ public class EnseignantDAO extends UserDao {
         return false;
     }
 
-	 @Override
-	    public void save(User user) {
+	    public static void save(User user) {
 	        if (user instanceof Teacher) {
 	            Teacher enseignant = (Teacher) user;
 	            try (Connection conn = JDBUtils.getConnection();
@@ -36,7 +35,7 @@ public class EnseignantDAO extends UserDao {
 	                e.printStackTrace();
 	            }
 	        } else {
-	            super.save(user);
+	            save(user);
 	        }
 	    }
 
@@ -47,7 +46,6 @@ public class EnseignantDAO extends UserDao {
 	             ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE role = 'enseignant'")) {
 	            while (rs.next()) {
 	                Teacher enseignant = new Teacher(
-	                        rs.getInt("id"),
 	                        rs.getString("username"),
 	                        rs.getString("lastName"),
 	                        rs.getString("email"),
@@ -69,7 +67,6 @@ public class EnseignantDAO extends UserDao {
 	            try (ResultSet rs = pstmt.executeQuery()) {
 	                if (rs.next()) {
 	                    enseignant = new Teacher(
-	                            rs.getInt("id"),
 	                            rs.getString("username"),
 	                            rs.getString("lastName"),
 	                            rs.getString("email"),

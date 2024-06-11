@@ -23,7 +23,7 @@ public class AdminDAO extends UserDao {
         return false;
     }
 
-	    public void save(User user) {
+	    public static void save(User user) {
 	        if (user instanceof Admin) {
 	            Admin admin = (Admin) user;
 	            try (Connection conn = JDBUtils.getConnection();
@@ -39,7 +39,7 @@ public class AdminDAO extends UserDao {
 	                e.printStackTrace();
 	            }
 	        } else {
-	            super.save(user);
+	            save(user);
 	        }
 	    }
 
@@ -50,7 +50,6 @@ public class AdminDAO extends UserDao {
 	             ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE role = 'admin'")) {
 	            while (rs.next()) {
 	                Admin admin = new Admin(
-	                        rs.getInt("id"),
 	                        rs.getString("username"),
 	                        rs.getString("lastName"),
 	                        rs.getString("email"),
@@ -72,7 +71,6 @@ public class AdminDAO extends UserDao {
 	            try (ResultSet rs = pstmt.executeQuery()) {
 	                if (rs.next()) {
 	                	admin = new Admin(
-	                            rs.getInt("id"),
 	                            rs.getString("username"),
 	                            rs.getString("lastName"),
 	                            rs.getString("email"),

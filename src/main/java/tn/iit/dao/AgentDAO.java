@@ -23,23 +23,23 @@ public class AgentDAO extends UserDao {
 	        return false;
 	    }
 
-		    public void save(User user) {
+		    public static void save(User user) {
 		        if (user instanceof Agent) {
 		        	Agent agent = (Agent) user;
 		            try (Connection conn = JDBUtils.getConnection();
 		                 PreparedStatement pstmt = conn.prepareStatement(
 		                         "INSERT INTO user (username, lastName, email, password, role) VALUES (?, ?, ?, ?, ?)")) {
-		                pstmt.setString(11, agent.getUsername());
-		                pstmt.setString(12, agent.getLastName());
-		                pstmt.setString(13, agent.getEmail());
-		                pstmt.setString(14, agent.getPassword());
-		                pstmt.setString(15, agent.getRole());
+		                pstmt.setString(1, agent.getUsername());
+		                pstmt.setString(2, agent.getLastName());
+		                pstmt.setString(3, agent.getEmail());
+		                pstmt.setString(4, agent.getPassword());
+		                pstmt.setString(5, agent.getRole());
 		                pstmt.executeUpdate();
 		            } catch (SQLException e) {
 		                e.printStackTrace();
 		            }
 		        } else {
-		            super.save(user);
+		            save(user);
 		        }
 		    }
 
@@ -50,7 +50,6 @@ public class AgentDAO extends UserDao {
 		             ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE role = 'agent'")) {
 		            while (rs.next()) {
 		                Agent agent = new Agent(
-		                        rs.getInt("id"),
 		                        rs.getString("username"),
 		                        rs.getString("lastName"),
 		                        rs.getString("email"),
@@ -72,7 +71,6 @@ public class AgentDAO extends UserDao {
 		            try (ResultSet rs = pstmt.executeQuery()) {
 		                if (rs.next()) {
 		                	agent = new Agent(
-		                            rs.getInt("id"),
 		                            rs.getString("username"),
 		                            rs.getString("lastName"),
 		                            rs.getString("email"),

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserDao {
 
-    public void save(User user) {
+    public static void save(User user) {
         try (Connection conn = JDBUtils.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(
                      "INSERT INTO user (username, lastName, email, password, role) VALUES (?, ?, ?, ?, ?)")) {
@@ -32,7 +32,6 @@ public class UserDao {
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     user = new User(
-                            rs.getInt("id"),
                             rs.getString("username"),
                             rs.getString("lastName"),
                             rs.getString("email"),
@@ -54,7 +53,6 @@ public class UserDao {
              ResultSet rs = stmt.executeQuery("SELECT * FROM users")) {
             while (rs.next()) {
                 User user = new User(
-                        rs.getInt("id"),
                         rs.getString("username"),
                         rs.getString("lastName"),
                         rs.getString("email"),
