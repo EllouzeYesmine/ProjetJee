@@ -7,8 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class JDBUtils {
+	//assurer la compatibilité des versions
 	private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/tirage";
+	//changer la base
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/gestimpriment";
     private static final String USER = "root"; 
     private static final String PASS = ""; 
 

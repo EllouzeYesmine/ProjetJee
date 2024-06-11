@@ -10,10 +10,10 @@ public class DBTest {
 	        try {
 	            Connection conn = JDBUtils.getConnection();
 	            if (conn != null) {
-	                System.out.println("Connexion � la base de donn�es �tablie avec succ�s !");
+	                System.out.println("Connexion a la base de donn�es �tablie avec succees !");
 	                conn.close(); 
 	            } else {
-	                System.out.println("La connexion � la base de donn�es a �chou�.");
+	                System.out.println("La connexion a la base de donn�es a echoue.");
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
