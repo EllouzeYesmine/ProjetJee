@@ -6,8 +6,8 @@ public class Admin extends User{
 		this.setRole("admin");
 	}
 
-	public Admin(int id, String username, String lastName, String email, String password) {
-		super(id, username, lastName, email, password, "admin");
+	public Admin(String username, String lastName, String email, String password) {
+		super(username, lastName, email, password, "admin");
 	}
 	
 
