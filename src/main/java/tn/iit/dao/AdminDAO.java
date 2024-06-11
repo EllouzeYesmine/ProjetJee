@@ -12,7 +12,16 @@ import tn.iit.model.Admin;
 import tn.iit.model.User;
 import utils.JDBUtils;
 
-public class AdminDAO extends User {
+public class AdminDAO extends UserDao {
+	
+    public static boolean authenticate(String username, String password) {
+        try {
+            return AuthentificationDAO.authenticate(username, password, "admin");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 	    public void save(User user) {
 	        if (user instanceof Admin) {
@@ -34,7 +43,7 @@ public class AdminDAO extends User {
 	        }
 	    }
 
-	    public List<Admin> getAllEnseignants() {
+	    public List<Admin> getAllAdmin() {
 	        List<Admin> enseignants = new ArrayList<>();
 	        try (Connection conn = JDBUtils.getConnection();
 	             Statement stmt = conn.createStatement();
@@ -55,7 +64,7 @@ public class AdminDAO extends User {
 	        return enseignants;
 	    }
 
-	    public Admin getEnseignantById(int id) {
+	    public Admin getAdminById(int id) {
 	    	Admin admin = null;
 	        try (Connection conn = JDBUtils.getConnection();
 	             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user WHERE id = ? AND role = 'admin'")) {

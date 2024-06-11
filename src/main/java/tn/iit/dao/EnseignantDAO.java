@@ -9,6 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnseignantDAO extends UserDao {
+    public static boolean authenticate(String username, String password) {
+        try {
+            // Utiliser le DAO AuthentificationDAO pour authentifier l'utilisateur
+            return AuthentificationDAO.authenticate(username, password, "enseignant");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 	 @Override
 	    public void save(User user) {
