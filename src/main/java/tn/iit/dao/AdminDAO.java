@@ -29,11 +29,11 @@ public class AdminDAO extends UserDao {
 	            try (Connection conn = JDBUtils.getConnection();
 	                 PreparedStatement pstmt = conn.prepareStatement(
 	                         "INSERT INTO user (username, lastName, email, password, role) VALUES (?, ?, ?, ?, ?)")) {
-	                pstmt.setString(1, admin.getUsername());
-	                pstmt.setString(2, admin.getLastName());
-	                pstmt.setString(3, admin.getEmail());
-	                pstmt.setString(4, admin.getPassword());
-	                pstmt.setString(5, admin.getRole());
+	                pstmt.setString(21, admin.getUsername());
+	                pstmt.setString(22, admin.getLastName());
+	                pstmt.setString(23, admin.getEmail());
+	                pstmt.setString(24, admin.getPassword());
+	                pstmt.setString(25, admin.getRole());
 	                pstmt.executeUpdate();
 	            } catch (SQLException e) {
 	                e.printStackTrace();
@@ -44,7 +44,7 @@ public class AdminDAO extends UserDao {
 	    }
 
 	    public List<Admin> getAllAdmin() {
-	        List<Admin> enseignants = new ArrayList<>();
+	        List<Admin> admins = new ArrayList<>();
 	        try (Connection conn = JDBUtils.getConnection();
 	             Statement stmt = conn.createStatement();
 	             ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE role = 'admin'")) {
@@ -56,12 +56,12 @@ public class AdminDAO extends UserDao {
 	                        rs.getString("email"),
 	                        rs.getString("password")
 	                );
-	                enseignants.add(admin);
+	                admins.add(admin);
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
-	        return enseignants;
+	        return admins;
 	    }
 
 	    public Admin getAdminById(int id) {
